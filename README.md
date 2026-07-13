@@ -1,44 +1,19 @@
-# MSPath: A Multi-Scale Vision-Language Model with Clinical Information Prompting for Pathology Report Generation]{A Multi-Scale Vision-Language Model with Clinical Information Prompting for Pathology Report Generation🔬
+# MSPath: A Multi-Scale Vision-Language Model with Clinical Information Prompting for Pathology Report Generation]🔬
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
 [![PyTorch 2.0](https://img.shields.io/badge/pytorch-2.0-red)](https://pytorch.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-## 项目简介
+## Abstract
 
-MSPath是一个基于**多倍率病理切片(WSI)分析**和**临床信息提示学习**的结直肠癌(COAD)病理诊断模型，实现：
-- 全自动肿瘤区域检测与分级
-- 结合临床数据(分期、分级)的多模态诊断
-- 病理报告结构化生成
-- 支持TCGA/HMU等多中心数据集的跨中心验证
+As the gold standard for disease diagnosis, the interpretation of histopathological images has long been constrained by inter-observer variability in manual reading and the substantial clinical workload, thereby highlighting the urgent need for AI-assisted generation of standardized pathology reports. However, existing methods are often limited by the computational bottlenecks associated with whole-slide images, where coarse-grained sampling may lead to the loss of diagnostically critical details. Moreover, purely vision-based models generally lack clinical priors, resulting in superficial image descriptions that are insufficient for precise diagnostic decision-making.To address these limitations, a deep hashing-based salient feature selection mechanism is proposed, by which the computational burden is substantially reduced while microscopic regions with the highest diagnostic value are preserved. To mitigate semantic insufficiency, patient clinical information is incorporated as a global prior into the model, thereby effectively alleviating the representation alignment bias between visual features and diagnostic conclusions. Finally, the reasoning capability of large language models is leveraged to translate multimodal features into standardized pathology reports that conform to medical reporting conventions.Experiments conducted on two public datasets and one private dataset demonstrate that MSPath achieves state-of-the-art performance in both diagnostic accuracy and clinical relevance.
 
-**核心创新**：提出了"病理特征+临床语义"双驱动的诊断范式，解决传统模型仅依赖视觉特征的局限性。
 
-## 目录
-- [项目简介](#项目简介)
-- [环境配置](#环境配置)
-- [快速开始](#快速开始)
-- [数据准备](#数据准备)
-  - [TCGA数据集处理](#tcga数据集处理)
-  - [本地WSI文件准备](#本地wsi文件准备)
-- [模型训练与评估](#模型训练与评估)
-- [项目结构](#项目结构)
-- [结果展示](#结果展示)
-- [引用方式](#引用方式)
-- [许可证](#许可证)
-- [联系方式](#联系方式)
 
-## 环境配置
 
-### 1. 依赖安装
-```bash
-# 克隆仓库
-git clone https://github.com/XuDa020612/MSPath.git
-cd MSPath
+## Main Contributions
+	1. MSPath, a vision-language model framework that integrates clinical priors with multi-scale visual features, is proposed. To overcome the limited contextual awareness of existing purely vision-based models in complex diagnostic scenarios, patient clinical information is incorporated into the model as a global prior. In this manner, the semantic mapping bias between microscopic pathological morphological features and macroscopic clinical diagnostic conclusions is effectively mitigated, thereby ensuring the clinical accuracy and logical consistency of the generated reports.
+	
+	2. A deep hashing-based salient region selection mechanism is designed to substantially reduce the computational cost of gigapixel-level whole-slide images. In contrast to conventional coarse-grained downsampling strategies, which may lead to the loss of critical pathological details, redundant information is efficiently filtered through hash encoding. Consequently, the computational burden is significantly reduced, while diagnostically informative microscopic regions are preserved and computational efficiency is improved.
+	
+	3. A high-fidelity pathology report generation paradigm driven by large language models is constructed. Multimodal features are transformed into standardized pathology reports that strictly conform to medical writing conventions, while the need for complex vocabulary construction and task-specific decoder design is eliminated. Extensive experiments on two public datasets and one private dataset demonstrate that MSPath achieves state-of-the-art performance in terms of diagnostic accuracy and text quality, indicating its strong generalization capability and promising potential for clinical application.
 
-# 创建环境（推荐conda）
-conda create -n mspath python=3.9
-conda activate mspath
-
-# 安装依赖
-pip install -r requirements.txt
